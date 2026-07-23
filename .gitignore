@@ -1,0 +1,6 @@
+dist/
+node_modules/
+.vercel/
+.DS_Store
+public/assets/asgard-mark.png
+public/assets/stormbreaker.glb
