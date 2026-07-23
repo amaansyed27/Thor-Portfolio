@@ -2,7 +2,7 @@ name: Build
 
 on:
   push:
-    branches: [main, cinematic-rebuild]
+    branches: [main, cinematic-rebuild-v3]
   pull_request:
 
 permissions:
@@ -11,27 +11,22 @@ permissions:
 jobs:
   production-build:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
-
+    timeout-minutes: 8
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-
-      - name: Set up Node
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 22
-
-      - name: Install dependencies
-        run: npm install --no-audit --no-fund
-
-      - name: Build cinematic site
-        run: npm run build
-
-      - name: Verify production assets
+          node-version: 24
+          cache: npm
+      - run: npm install --no-audit --no-fund
+      - run: npm run check
+      - run: npm run build
+      - name: Verify supplied assets and production bundle
         shell: bash
         run: |
           test -s dist/index.html
-          test -s dist/assets/asgard-mark.png
           test -s dist/assets/stormbreaker.glb
-          find dist/assets -name '*.js' -size +1k | grep -q .
+          test -s dist/assets/asgard-mark.png
+          test "$(head -c 4 dist/assets/stormbreaker.glb)" = "glTF"
+          grep -R "Reassembling Stormbreaker from source chunks" dist/assets/*.js
+          grep -R "STORMBREAKER COULD NOT BE FORGED" dist/assets/*.js
