@@ -11,7 +11,7 @@ permissions:
 jobs:
   production-build:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -29,3 +29,18 @@ jobs:
           test "$(head -c 4 dist/assets/stormbreaker.glb)" = "glTF"
           grep -R "Reassembling Stormbreaker from source chunks" dist/assets/*.js
           grep -R "STORMBREAKER COULD NOT BE FORGED" dist/assets/*.js
+      - name: Install Chromium
+        run: npx playwright install chromium --with-deps
+      - name: Verify rendered Stormbreaker and scroll sequences
+        run: npm run test:e2e
+      - name: Upload browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: thor-cinematic-browser-evidence
+          path: |
+            artifacts/screens
+            playwright-report
+            test-results
+          if-no-files-found: ignore
+          retention-days: 7
