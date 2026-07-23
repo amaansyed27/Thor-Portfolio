@@ -4,7 +4,7 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
-import gsap from 'gsap';
+import { gsap } from 'gsap';
 
 const assetUrl = (path) => new URL(`./assets/${path}`, document.baseURI).href;
 
@@ -60,7 +60,6 @@ export class ThorWorld {
     this.scene = new THREE.Scene();
     this.scene.background = new THREE.Color(0x02050a);
     this.scene.fog = new THREE.FogExp2(0x02050a, 0.037);
-
     this.camera = new THREE.PerspectiveCamera(40, innerWidth / innerHeight, 0.05, 120);
     this.camera.position.set(0, 0.15, 8.5);
 
@@ -94,7 +93,6 @@ export class ThorWorld {
     this.animate = this.animate.bind(this);
     addEventListener('resize', this.resize, { passive: true });
     requestAnimationFrame(this.animate);
-
     this.ready = this.loadStormbreaker();
   }
 
@@ -188,9 +186,7 @@ export class ThorWorld {
   }
 
   parseGlb(buffer) {
-    return new Promise((resolve, reject) => {
-      new GLTFLoader().parse(buffer, document.baseURI, (gltf) => resolve(gltf.scene), reject);
-    });
+    return new Promise((resolve, reject) => new GLTFLoader().parse(buffer, document.baseURI, (gltf) => resolve(gltf.scene), reject));
   }
 
   async fetchPrimaryGlb() {
@@ -252,7 +248,7 @@ export class ThorWorld {
     const center = box.getCenter(new THREE.Vector3());
     if (!Number.isFinite(size.x + size.y + size.z) || Math.max(size.x, size.y, size.z) < 0.0001) throw new Error('Stormbreaker GLB contains no visible geometry');
     object.position.sub(center);
-    object.scale.setScalar(4.7 / Math.max(size.x, size.y, size.z));
+    const normalizedScale = 4.7 / Math.max(size.x, size.y, size.z);
     let meshCount = 0;
     object.traverse((child) => {
       if (!child.isMesh) return;
@@ -268,6 +264,7 @@ export class ThorWorld {
     });
     if (!meshCount) throw new Error('Stormbreaker GLB did not contain mesh nodes');
     this.modelMount.clear();
+    this.modelMount.scale.setScalar(normalizedScale);
     this.modelMount.add(object);
     this.modelObject = object;
     this.modelReady = true;
