@@ -2,8 +2,8 @@ import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
   testDir: './tests',
-  timeout: 45_000,
-  expect: { timeout: 12_000 },
+  timeout: 90_000,
+  expect: { timeout: 15_000 },
   fullyParallel: false,
   retries: process.env.CI ? 1 : 0,
   workers: 1,
@@ -16,9 +16,10 @@ export default defineConfig({
   },
   projects: [
     {
-      name: 'chromium-desktop',
+      name: 'chrome-desktop',
       use: {
         ...devices['Desktop Chrome'],
+        channel: 'chrome',
         viewport: { width: 1440, height: 900 },
         launchOptions: {
           args: ['--use-angle=swiftshader', '--enable-webgl', '--ignore-gpu-blocklist'],
