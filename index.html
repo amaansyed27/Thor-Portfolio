@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="The cinematic portfolio of Abhishek Singh Chauhan — full-stack developer and cyber security enthusiast."
+    />
+    <meta name="theme-color" content="#05070a" />
+    <title>Abhishek Singh Chauhan — Forged in Code</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/src/styles/base.css" />
+    <link rel="stylesheet" href="/src/styles/cinematic.css" />
+    <link rel="stylesheet" href="/src/styles/responsive.css" />
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/@google/model-viewer@4.2.0/dist/model-viewer.min.js"
+    ></script>
+  </head>
+  <body class="is-loading">
+    <canvas id="storm-canvas" aria-hidden="true"></canvas>
+    <div class="storm-vignette" aria-hidden="true"></div>
+    <div class="film-grain" aria-hidden="true"></div>
+
+    <div id="intro" class="intro" aria-label="Opening cinematic">
+      <div class="intro__clouds" aria-hidden="true"></div>
+      <div class="intro__rings" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </div>
+      <div class="intro__mark-wrap">
+        <img
+          class="intro__mark"
+          src="/assets/asgard-mark.png"
+          alt="Asgard triquetra"
+          width="638"
+          height="604"
+        />
+        <span class="intro__mark-glow" aria-hidden="true"></span>
+      </div>
+      <p class="intro__eyebrow">The Bifrost is open</p>
+      <h1 class="intro__title">
+        <span>Forged</span>
+        <span>in the storm</span>
+      </h1>
+      <p class="intro__name">Abhishek Singh Chauhan</p>
+      <button id="skip-intro" class="intro__skip" type="button">Skip transmission</button>
+    </div>
+
+    <header class="site-header">
+      <a class="brand" href="#home" aria-label="Back to the beginning">
+        <img src="/assets/asgard-mark.png" alt="" width="44" height="42" />
+        <span>ASC</span>
+      </a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="#about">Origin</a>
+        <a href="#projects">Sagas</a>
+        <a href="#arsenal">Arsenal</a>
+        <a href="#contact">Signal</a>
+      </nav>
+      <button class="sound-toggle" type="button" aria-pressed="false" aria-label="Toggle atmospheric sound">
+        <span class="sound-toggle__bars" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="sound-toggle__label">Atmosphere</span>
+      </button>
+    </header>
+
+    <aside class="scroll-rail" aria-hidden="true">
+      <span class="scroll-rail__label">Realm traversal</span>
+      <span class="scroll-rail__track"><i id="scroll-progress"></i></span>
+      <span id="scroll-index" class="scroll-rail__index">01</span>
+    </aside>
+
+    <main>
+      <section id="home" class="hero realm" data-realm="01">
+        <div class="hero__aurora" aria-hidden="true"></div>
+        <div class="hero__grid" aria-hidden="true"></div>
+        <div class="hero__copy">
+          <p class="kicker reveal">Full-stack developer <span>&</span> cyber defender</p>
+          <h1 class="hero__name" aria-label="Abhishek Singh Chauhan">
+            <span class="hero__line" data-parallax="-0.06">Abhishek</span>
+            <span class="hero__line hero__line--outline" data-parallax="0.04">Singh</span>
+            <span class="hero__line" data-parallax="-0.03">Chauhan</span>
+          </h1>
+          <div class="hero__foot reveal">
+            <p>Building secure, scalable systems at the edge of code and cyber security.</p>
+            <a class="text-link" href="#projects">Enter the sagas <span>↘</span></a>
+          </div>
+        </div>
+
+        <div class="weapon-stage" aria-label="Interactive Stormbreaker model">
+          <div class="weapon-stage__halo" aria-hidden="true"></div>
+          <model-viewer
+            id="stormbreaker"
+            src="/assets/stormbreaker.glb"
+            alt="Stormbreaker battle axe floating in a storm"
+            camera-controls
+            disable-pan
+            interaction-prompt="none"
+            shadow-intensity="1.8"
+            shadow-softness="0.65"
+            exposure="0.82"
+            tone-mapping="aces"
+            camera-orbit="-26deg 78deg 105%"
+            min-camera-orbit="auto 48deg 70%"
+            max-camera-orbit="auto 112deg 150%"
+            field-of-view="27deg"
+            orientation="90deg -12deg 32deg"
+            environment-image="neutral"
+          >
+            <div class="model-loader" slot="progress-bar">
+              <span></span>
+              <small>Summoning Stormbreaker</small>
+            </div>
+          </model-viewer>
+          <p class="weapon-stage__caption"><span>01</span> Drag to wield</p>
+        </div>
+
+        <div class="hero__coordinates" aria-hidden="true">
+          <span>23.2599° N</span>
+          <span>77.4126° E</span>
+        </div>
+        <a class="hero__scroll" href="#about"><span></span>Descend</a>
+      </section>
+
+      <section id="about" class="origin realm" data-realm="02">
+        <div class="section-line" aria-hidden="true"></div>
+        <div class="section-heading">
+          <p class="kicker reveal">Realm 02 / Origin</p>
+          <h2 class="display-title reveal">Born curious.<br />Built <em>resilient.</em></h2>
+        </div>
+        <div class="origin__body">
+          <p class="origin__lead reveal">
+            I build software like a fortress:
+            <strong>deliberate at the core, powerful at the surface.</strong>
+          </p>
+          <div class="origin__copy reveal">
+            <p>
+              I’m an Integrated M.Tech student specialising in Cyber Security at VIT Bhopal,
+              with a strong foundation in full-stack development, security frameworks and
+              backend APIs.
+            </p>
+            <p>
+              My work crosses voice intelligence, autonomous defence and human-centred web
+              products — always with security engineered in, never bolted on.
+            </p>
+          </div>
+          <dl class="origin__facts reveal">
+            <div><dt>Discipline</dt><dd>Cyber Security</dd></div>
+            <div><dt>Current realm</dt><dd>Bhopal, India</dd></div>
+            <div><dt>Education</dt><dd>Integrated M.Tech · 2023–28</dd></div>
+            <div><dt>Focus</dt><dd>Secure systems by design</dd></div>
+          </dl>
+        </div>
+        <p class="giant-word" aria-hidden="true" data-parallax="0.08">WORTHY</p>
+      </section>
+
+      <section id="projects" class="sagas realm" data-realm="03">
+        <div class="section-heading section-heading--wide">
+          <p class="kicker reveal">Realm 03 / Selected sagas</p>
+          <h2 class="display-title reveal">Three battles.<br />One evolving craft.</h2>
+        </div>
+
+        <article class="saga saga--voice">
+          <div class="saga__number" aria-hidden="true">I</div>
+          <div class="saga__meta reveal">
+            <span>Voice intelligence</span>
+            <span>2026</span>
+          </div>
+          <div class="saga__content">
+            <h3 class="reveal">The voice<br />honeypot</h3>
+            <p class="saga__summary reveal">
+              A multilingual voice-analysis system that detects scam attempts in real time,
+              captures suspicious patterns and logs high-risk communication.
+            </p>
+            <ul class="tech-line reveal" aria-label="Technologies">
+              <li>JavaScript</li><li>NLP</li><li>Voice processing</li><li>Pattern recognition</li>
+            </ul>
+          </div>
+          <div class="saga__signal" aria-hidden="true">
+            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+          </div>
+        </article>
+
+        <article class="saga saga--portal">
+          <div class="saga__number" aria-hidden="true">II</div>
+          <div class="saga__meta reveal">
+            <span>Full-stack platform</span>
+            <span>Web</span>
+          </div>
+          <div class="saga__content">
+            <h3 class="reveal">The feedback<br />portal</h3>
+            <p class="saga__summary reveal">
+              A secure student feedback and faculty-rating platform with a responsive React
+              interface, persistent MongoDB storage and tested REST APIs.
+            </p>
+            <ul class="tech-line reveal" aria-label="Technologies">
+              <li>React</li><li>Node.js</li><li>Express</li><li>MongoDB</li><li>Postman</li>
+            </ul>
+          </div>
+          <div class="saga__orbit" aria-hidden="true"><i></i><i></i><i></i></div>
+        </article>
+
+        <article class="saga saga--uav">
+          <div class="saga__number" aria-hidden="true">III</div>
+          <div class="saga__meta reveal">
+            <span>Autonomous defence</span>
+            <span>Research</span>
+          </div>
+          <div class="saga__content">
+            <h3 class="reveal">Attitude-aware<br />cyber defence</h3>
+            <p class="saga__summary reveal">
+              A dynamics-constrained intrusion-detection framework for autonomous UAVs,
+              designed to identify and mitigate command-injection attacks during flight.
+            </p>
+            <ul class="tech-line reveal" aria-label="Technologies">
+              <li>Python</li><li>MATLAB/Simulink</li><li>Deep learning</li><li>Cybersecurity</li>
+            </ul>
+          </div>
+          <div class="saga__radar" aria-hidden="true"><span></span><i></i><b></b></div>
+        </article>
+      </section>
+
+      <section id="arsenal" class="arsenal realm" data-realm="04">
+        <div class="section-heading section-heading--wide">
+          <p class="kicker reveal">Realm 04 / Arsenal</p>
+          <h2 class="display-title reveal">Tools of the trade.</h2>
+        </div>
+
+        <div class="skill-marquee" aria-hidden="true">
+          <div>
+            <span>Java</span><i>✦</i><span>C++</span><i>✦</i><span>JavaScript</span><i>✦</i>
+            <span>Python</span><i>✦</i><span>SQL</span><i>✦</i><span>React</span><i>✦</i>
+            <span>Node.js</span><i>✦</i><span>Cyber Security</span><i>✦</i>
+          </div>
+        </div>
+
+        <div class="arsenal__list">
+          <article class="skill-row reveal">
+            <span class="skill-row__index">01</span>
+            <h3>Languages</h3>
+            <p>Java · C++ · JavaScript · Python · SQL</p>
+          </article>
+          <article class="skill-row reveal">
+            <span class="skill-row__index">02</span>
+            <h3>Interfaces</h3>
+            <p>React.js · Vite · HTML5 · CSS3</p>
+          </article>
+          <article class="skill-row reveal">
+            <span class="skill-row__index">03</span>
+            <h3>Systems</h3>
+            <p>Node.js · Express.js · REST APIs · Postman</p>
+          </article>
+          <article class="skill-row reveal">
+            <span class="skill-row__index">04</span>
+            <h3>Intelligence</h3>
+            <p>NLP · Voice patterns · Semantic analysis · API security</p>
+          </article>
+          <article class="skill-row reveal">
+            <span class="skill-row__index">05</span>
+            <h3>Data & craft</h3>
+            <p>MongoDB · PostgreSQL · Git · GitHub · Vercel</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="chronicle realm" data-realm="05">
+        <div class="section-heading">
+          <p class="kicker reveal">Realm 05 / Chronicle</p>
+          <h2 class="display-title reveal">Learning is<br />the long game.</h2>
+        </div>
+        <div class="chronicle__timeline">
+          <article class="timeline-entry reveal">
+            <span>2023 — 2028</span>
+            <div>
+              <p>Integrated M.Tech</p>
+              <h3>Computer Science & Engineering</h3>
+              <small>Cyber Security · VIT Bhopal University</small>
+            </div>
+          </article>
+          <article class="timeline-entry reveal">
+            <span>Feb 2026</span>
+            <div>
+              <p>Google Career Certificates</p>
+              <h3>Google IT Support</h3>
+              <small>Systems · Troubleshooting · IT operations</small>
+            </div>
+          </article>
+          <article class="timeline-entry reveal">
+            <span>Oct 2025</span>
+            <div>
+              <p>Google · Coursera</p>
+              <h3>The Bits and Bytes of Computer Networking</h3>
+              <small>Networks · Protocols · Infrastructure</small>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="contact" class="contact realm" data-realm="06">
+        <div class="contact__bifrost" aria-hidden="true"></div>
+        <img class="contact__mark" src="/assets/asgard-mark.png" alt="" width="638" height="604" />
+        <p class="kicker reveal">Final realm / Open channel</p>
+        <h2 class="contact__title reveal">Have a worthy<br />problem?</h2>
+        <a
+          class="contact__mail reveal"
+          href="https://linkedin.com/in/abhishek-singh-chauhan-124070331/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <span>Send a signal</span>
+          <strong>Connect on LinkedIn</strong>
+          <i>↗</i>
+        </a>
+        <div class="contact__links reveal">
+          <a href="https://linkedin.com/in/abhishek-singh-chauhan-124070331/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+          <a href="https://github.com/chauhanabhi1289" target="_blank" rel="noreferrer">GitHub ↗</a>
+          <a href="#projects">Selected work ↓</a>
+        </div>
+        <footer>
+          <span>© 2026 Abhishek Singh Chauhan</span>
+          <span>Designed beyond the nine realms</span>
+          <a href="#home">Return to Asgard ↑</a>
+        </footer>
+      </section>
+    </main>
+
+    <noscript>This experience needs JavaScript to open the Bifrost.</noscript>
+    <script type="module" src="/src/js/main.js"></script>
+  </body>
+</html>
