@@ -1,0 +1,18 @@
+.hero h1,
+.section-heading h2,
+.sagas__intro h2,
+.contact h2 {
+  white-space: nowrap;
+}
+
+.origin .section-heading h2,
+.chronicle .section-heading h2 {
+  font-size: clamp(3.2rem, 5.6vw, 5.8rem);
+}
+
+@media (max-width: 620px) {
+  .origin .section-heading h2,
+  .chronicle .section-heading h2 {
+    font-size: clamp(2.65rem, 11vw, 3.55rem);
+  }
+}
