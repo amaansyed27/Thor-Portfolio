@@ -8,7 +8,8 @@
     "dev": "npm run prepare:assets && vite --host 127.0.0.1 --port 4173",
     "build": "npm run prepare:assets && vite build",
     "preview": "vite preview --host 127.0.0.1 --port 4173",
-    "check": "node --check src/main.js && node --check src/world.js && node --check src/storm-audio.js && node --check scripts/prepare-assets.mjs"
+    "check": "node --check src/main.js && node --check src/world.js && node --check src/storm-audio.js && node --check scripts/prepare-assets.mjs && node --check playwright.config.js && node --check tests/cinematic.spec.js",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "gsap": "3.15.0",
@@ -16,6 +17,7 @@
     "three": "0.185.1"
   },
   "devDependencies": {
+    "@playwright/test": "1.61.1",
     "vite": "8.1.5"
   },
   "engines": {
