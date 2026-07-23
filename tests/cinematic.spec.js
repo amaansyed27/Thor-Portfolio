@@ -55,6 +55,11 @@ test('loads and visibly renders the supplied Stormbreaker through the full cinem
   await page.goto('/', { waitUntil: 'domcontentloaded' });
   await page.locator('html[data-stormbreaker="loaded"]').waitFor({ timeout: 35_000 });
   await expect(page.locator('#loader')).toBeHidden({ timeout: 8_000 });
+  await expect(page.locator('#intro')).toBeVisible();
+  await expect(page.locator('.sigil--intro .sigil__loops path')).toHaveCount(3);
+  await page.waitForTimeout(1250);
+  await page.screenshot({ path: 'artifacts/screens/asgard-opening.png', fullPage: false });
+
   await expect(page.locator('body')).not.toHaveClass(/is-cinematic/, { timeout: 12_000 });
   await page.waitForTimeout(500);
 
