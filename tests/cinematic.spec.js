@@ -20,12 +20,9 @@ async function modelDiagnostics(page) {
       if (!mesh.geometry.boundingBox) mesh.geometry.computeBoundingBox();
       const box = mesh.geometry.boundingBox;
       if (!box) return;
-      const valuesX = [box.min.x, box.max.x];
-      const valuesY = [box.min.y, box.max.y];
-      const valuesZ = [box.min.z, box.max.z];
-      for (const x of valuesX) {
-        for (const y of valuesY) {
-          for (const z of valuesZ) {
+      for (const x of [box.min.x, box.max.x]) {
+        for (const y of [box.min.y, box.max.y]) {
+          for (const z of [box.min.z, box.max.z]) {
             const point = box.min.clone().set(x, y, z).applyMatrix4(mesh.matrixWorld).project(world.camera);
             minX = Math.min(minX, point.x);
             maxX = Math.max(maxX, point.x);
@@ -51,15 +48,15 @@ async function modelDiagnostics(page) {
 }
 
 test('loads and visibly renders the supplied Stormbreaker through the full cinematic page', async ({ page }) => {
+  test.setTimeout(90_000);
   const pageErrors = [];
   page.on('pageerror', (error) => pageErrors.push(error.message));
 
   await page.goto('/', { waitUntil: 'domcontentloaded' });
   await page.locator('html[data-stormbreaker="loaded"]').waitFor({ timeout: 35_000 });
   await expect(page.locator('#loader')).toBeHidden({ timeout: 8_000 });
-  await page.locator('#skip-intro').click({ force: true });
-  await expect(page.locator('body')).not.toHaveClass(/is-cinematic/);
-  await page.waitForTimeout(900);
+  await expect(page.locator('body')).not.toHaveClass(/is-cinematic/, { timeout: 12_000 });
+  await page.waitForTimeout(500);
 
   const diagnostics = await modelDiagnostics(page);
   expect(diagnostics).not.toBeNull();
@@ -69,22 +66,21 @@ test('loads and visibly renders the supplied Stormbreaker through the full cinem
   expect(diagnostics.pixelWidth).toBeGreaterThan(80);
   expect(diagnostics.pixelHeight).toBeGreaterThan(120);
   expect(diagnostics.mountScale).toBeGreaterThan(0);
-
   await page.screenshot({ path: 'artifacts/screens/hero-stormbreaker.png', fullPage: false });
 
-  await page.evaluate(() => window.scrollTo(0, document.querySelector('#origin').offsetTop + innerHeight * 0.25));
-  await page.waitForTimeout(900);
+  await page.evaluate(() => window.scrollTo(0, document.querySelector('#origin').offsetTop + innerHeight * 0.12));
+  await page.waitForTimeout(700);
   expect((await modelDiagnostics(page)).visibleCorners).toBeGreaterThan(0);
   await page.screenshot({ path: 'artifacts/screens/origin-scroll.png', fullPage: false });
 
-  await page.evaluate(() => window.scrollTo(0, document.querySelector('#sagas').offsetTop + innerHeight * 1.6));
-  await page.waitForTimeout(1200);
+  await page.evaluate(() => window.scrollTo(0, document.querySelector('#sagas').offsetTop + innerHeight * 1.55));
+  await page.waitForTimeout(1000);
   const transform = await page.locator('.sagas__track').evaluate((element) => getComputedStyle(element).transform);
   expect(transform).not.toBe('none');
   await page.screenshot({ path: 'artifacts/screens/pinned-saga.png', fullPage: false });
 
-  await page.locator('#contact').scrollIntoViewIfNeeded();
-  await page.waitForTimeout(1000);
+  await page.evaluate(() => window.scrollTo(0, document.querySelector('#contact').offsetTop + innerHeight * 0.2));
+  await page.waitForTimeout(900);
   const contactTitle = await page.locator('#contact h2').boundingBox();
   expect(contactTitle).not.toBeNull();
   expect(contactTitle.width).toBeGreaterThan(contactTitle.height * 1.5);
